@@ -73,7 +73,15 @@ const Judges: React.FC = () => {
 
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {judges.map((judge, index) => (
-            <FlipCard key={index}>
+            <FlipCard key={index} className="touch-manipulation" onClick={(e)=>{
+              // On small screens, toggle a class instead of relying on hover
+              if (window.innerWidth < 640) {
+                const inner = (e.currentTarget as HTMLElement).querySelector('.flip-card-inner');
+                if(inner){
+                  inner.classList.toggle('rotate-180');
+                }
+              }
+            }}>
               <div className="flip-card-inner">
                 <div className="flip-card-front">
                   <img src={judge.image} alt={judge.name} className="w-24 h-24 rounded-full mb-4" />
@@ -108,13 +116,19 @@ const FlipCard = styled.div`
   .flip-card-inner {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 280px;
+    @media (max-width: 640px){
+      height: 240px;
+    }
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
   }
   &:hover .flip-card-inner {
     transform: rotateY(180deg);
+  }
+  .rotate-180 {
+    transform: rotateY(180deg) !important;
   }
   .flip-card-front, .flip-card-back {
     position: absolute;

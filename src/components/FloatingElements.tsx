@@ -18,7 +18,7 @@ const FloatingElements: React.FC<FloatingElementsProps> = ({ className }) => {
 
   return (
   <div className={cn("fixed inset-0 pointer-events-none z-0 overflow-hidden", className)} aria-hidden="true">
-      {shapes.map((shape, index) => {
+  {shapes.map((shape, index) => {
         return (
           <div
             key={index}
@@ -26,7 +26,7 @@ const FloatingElements: React.FC<FloatingElementsProps> = ({ className }) => {
               shape.color,
               shape.size,
               shape.shape !== 'triangle' && shape.shape !== 'star' ? shape.shape : '',
-              "absolute opacity-30 filter blur-sm transition-transform duration-3000",
+      "absolute opacity-30 filter blur-sm transition-transform duration-3000 hidden xs:block",
               `floating floating-delay-${index % 4 + 1}`
             )}
             style={{
@@ -56,7 +56,7 @@ const FloatingElements: React.FC<FloatingElementsProps> = ({ className }) => {
   <div className="hidden sm:block absolute top-1/2 right-1/4 w-24 h-24 rounded-full border-2 border-dotted border-hackathon-cyan opacity-15 animate-bounce-gentle" />
       
       {/* Cute cloud elements */}
-      <div className="absolute top-1/3 left-1/5 w-16 h-8 bg-white opacity-10 rounded-full before:content-[''] before:absolute before:top-[-50%] before:left-[25%] before:w-8 before:h-8 before:bg-white before:rounded-full after:content-[''] after:absolute after:top-[-40%] after:left-[60%] after:w-6 after:h-6 after:bg-white after:rounded-full floating floating-delay-2" />
+  <div className="hidden xs:block absolute top-1/3 left-1/5 w-16 h-8 bg-white opacity-10 rounded-full before:content-[''] before:absolute before:top-[-50%] before:left-[25%] before:w-8 before:h-8 before:bg-white before:rounded-full after:content-[''] after:absolute after:top-[-40%] after:left-[60%] after:w-6 after:h-6 after:bg-white after:rounded-full floating floating-delay-2" />
       
       {/* Decorative lines */}
       <div className="absolute top-0 left-1/4 w-px h-40 bg-gradient-to-b from-transparent via-hackathon-pink to-transparent opacity-20" />
@@ -73,7 +73,7 @@ const FloatingElements: React.FC<FloatingElementsProps> = ({ className }) => {
   {Array.from({ length: 16 }).map((_, i) => (
         <div
           key={`star-${i}`}
-          className="absolute rounded-full animate-blinking-stars"
+          className="absolute rounded-full animate-blinking-stars hidden xs:block"
           style={{
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,

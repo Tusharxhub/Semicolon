@@ -496,8 +496,8 @@ const Team = () => {
           className={`bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl ${isModalOpen ? 'animate-modalEntry' : 'animate-modalExit'}`}
           onClick={e => e.stopPropagation()}
         >
-          <div className="p-6 flex flex-col md:flex-row gap-6">
-            <div className="md:w-1/3">
+          <div className="p-4 sm:p-6 flex flex-col md:flex-row gap-4 sm:gap-6">
+            <div className="md:w-1/3 w-full">
               <div className="animate-floatAvatar">
                 <Avatar className="w-full h-auto aspect-square rounded-md border-4 border-slate-200 shadow-md overflow-hidden">
                   <AvatarImage src={selectedMember.image} alt={selectedMember.name} className="object-cover" />
@@ -547,7 +547,7 @@ const Team = () => {
               </div>
             </div>
             
-            <div className="md:w-2/3">
+            <div className="md:w-2/3 w-full">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-2xl font-bold text-slate-800">{selectedMember.name}</h3>

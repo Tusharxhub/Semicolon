@@ -152,7 +152,7 @@ const Timeline: React.FC = () => {
                     <div 
                       key={index} 
                       className={cn(
-                        "relative px-3 min-w-[160px]",
+                        "relative px-3 min-w-[140px] xs:min-w-[150px] sm:min-w-[160px]",
                         event.day === 2 ? "mt-24" : ""
                       )}
                       style={{

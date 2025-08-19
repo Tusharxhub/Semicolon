@@ -97,7 +97,7 @@ const Hero = () => {
               </div>
             </div>
             
-            <div className="grid grid-cols-4 gap-2 sm:gap-4" aria-label="Countdown to hackathon start">
+            <div className="grid grid-cols-2 xs:grid-cols-4 gap-3 sm:gap-4" aria-label="Countdown to hackathon start">
               {Object.entries(timeLeft).map(([label, value]) => (
                 <div key={label} className="glass-card p-2 sm:p-4 rounded-xl text-center hover:transform hover:scale-105 transition-transform duration-300">
                   <div className="text-xl sm:text-3xl font-bold text-hackathon-blue mb-1">
