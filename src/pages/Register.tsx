@@ -325,7 +325,7 @@ const Register = () => {
               <div className="w-2 h-2 rounded-full bg-hackathon-cyan"></div>
               <div className="w-2 h-2 rounded-full bg-hackathon-yellow"></div>
             </div>
-            <p className="mt-4 text-gray-600">Join us for 48 hours of coding, fun, and innovation!</p>
+            <p className="mt-4 text-gray-600">Join us for 24 hours of coding, fun, and innovation!</p>
           </div>
         </div>
       </div>
