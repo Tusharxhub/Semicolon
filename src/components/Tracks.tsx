@@ -24,7 +24,7 @@ const Tracks: React.FC = () => {
     {
       title: "Hardware",
       description: "Design and prototype hardware projects, IoT devices, robotics, or electronics. Bring your ideas to life with hands-on engineering.",
-      icon: "�️",
+      icon: "🧰",
       color: "bg-hackathon-pink",
       prizes: ["Cash Prizes", "Hardware Kits", "Industry Networking"]
     }
