@@ -81,7 +81,7 @@ const Navbar: React.FC = () => {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-        className="text-slate-700 hover:text-hackathon-pink transition-colors relative group font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-hackathon-pink/50 rounded"
+        className="text-slate-300 hover:text-hackathon-pink transition-colors relative group font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-hackathon-pink/50 rounded"
               >
                 {item.title}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-hackathon-pink transition-all duration-300 group-hover:w-full" />
