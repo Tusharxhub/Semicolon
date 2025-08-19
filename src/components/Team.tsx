@@ -587,7 +587,7 @@ const Team = () => {
   };
 
   return (
-  <section id="team" ref={teamRef} className="py-16 md:py-20 bg-slate-50 opacity-0">
+  <section id="team" ref={teamRef} className="py-16 md:py-20 bg-slate-50 opacity-0 overflow-x-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold mb-4 text-slate-800 relative inline-block leading-tight">

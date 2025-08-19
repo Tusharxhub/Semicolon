@@ -12,10 +12,14 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			// Use smaller padding on very small screens for better fit
 			padding: {
-				DEFAULT: '2rem',
-				sx: '1rem'
+				DEFAULT: '1rem', // base phones 320-399
+				sx: '1rem',      // custom tiny alias (non-standard but retained)
+				sm: '1.25rem',   // >=640
+				md: '1.5rem',    // >=768 tablets
+				lg: '2rem',      // >=1024 laptops
+				xl: '2.5rem',    // >=1280 desktops
+				'2xl': '3rem',   // >=1536 large desktops
 			},
 			screens: {
 				'2xl': '1400px'

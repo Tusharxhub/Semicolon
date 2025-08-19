@@ -66,8 +66,8 @@ const Sponsors: React.FC = () => {
         <div className="marquee-container py-8 md:py-10">
           <div className="marquee-content">
             {sponsorLogos.map((sponsor, index) => (
-              <Card key={index} className="sponsor-card magnetic-button glass-card border-2 hover:border-hackathon-pink hover-float min-w-[180px] sm:min-w-[220px]">
-                <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 h-36 md:h-40 w-48 sm:w-56 md:w-64">
+              <Card key={index} className="sponsor-card magnetic-button glass-card border-2 hover:border-hackathon-pink hover-float min-w-[150px] xs:min-w-[170px] sm:min-w-[200px]">
+                <CardContent className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 h-32 sm:h-36 md:h-40 w-40 xs:w-44 sm:w-52 md:w-60">
                   <div className={cn("w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-3 md:mb-4", sponsor.color)}>
                     <span className="text-xl md:text-2xl font-bold text-white">{sponsor.name.charAt(0)}</span>
                   </div>
@@ -81,8 +81,8 @@ const Sponsors: React.FC = () => {
         <div className="marquee-container py-8 md:py-10 mt-4 md:mt-6">
           <div className="marquee-content" style={{ animationDirection: 'reverse' }}>
             {sponsorLogos.slice().reverse().map((sponsor, index) => (
-              <Card key={index} className="sponsor-card magnetic-button glass-card border-2 hover:border-hackathon-cyan hover-float min-w-[180px] sm:min-w-[220px]">
-                <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 h-36 md:h-40 w-48 sm:w-56 md:w-64">
+              <Card key={index} className="sponsor-card magnetic-button glass-card border-2 hover:border-hackathon-cyan hover-float min-w-[150px] xs:min-w-[170px] sm:min-w-[200px]">
+                <CardContent className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 h-32 sm:h-36 md:h-40 w-40 xs:w-44 sm:w-52 md:w-60">
                   <div className={cn("w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-3 md:mb-4", sponsor.color)}>
                     <span className="text-xl md:text-2xl font-bold text-white">{sponsor.name.charAt(0)}</span>
                   </div>

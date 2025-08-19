@@ -85,7 +85,7 @@ const Register = () => {
   );
 
   return (
-  <div className="relative min-h-screen mesh-gradient overflow-hidden pt-24 sm:pt-28">
+  <div className="relative min-h-screen mesh-gradient overflow-hidden pt-24 sm:pt-28 no-scroll-x">
       <FloatingElements className="opacity-70" />
       
       <div className="container mx-auto px-4 py-10 md:py-12 relative z-10">

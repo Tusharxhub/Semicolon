@@ -65,10 +65,10 @@ const Index = () => {
   }, []);
 
   return (
-  <div className="relative min-h-screen home-bg">
+  <div className="relative min-h-screen home-bg no-scroll-x">
       <FloatingElements />
       <Navbar />
-      <main>
+  <main className="overflow-x-hidden">
         <Hero />
         <div className="reveal-section">
           <About />

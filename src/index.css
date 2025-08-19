@@ -104,6 +104,22 @@
     font-family: 'Press Start 2P', cursive !important;
   }
 
+    /* Fluid responsive typography scale */
+    h1 { font-size: clamp(2rem, 6vw, 3.75rem); }
+    h2 { font-size: clamp(1.75rem, 4.5vw, 3rem); }
+    h3 { font-size: clamp(1.25rem, 3.5vw, 2.25rem); }
+    p, li { font-size: clamp(0.8rem, 1.5vw, 1rem); line-height: 1.5; }
+    small { font-size: clamp(0.65rem, 1.2vw, 0.8rem); }
+
+    /* Prevent images and media from overflowing */
+    img, video, canvas, svg { max-width: 100%; height: auto; }
+    iframe { max-width: 100%; }
+
+    /* Utility to contain long words / code */
+    .break-words { overflow-wrap: anywhere; word-break: break-word; }
+    .no-scroll-x { overflow-x: hidden !important; }
+    .responsive-section { width: 100%; margin-left: auto; margin-right: auto; }
+
   * {
     font-family: 'Press Start 2P', cursive !important;
   }
