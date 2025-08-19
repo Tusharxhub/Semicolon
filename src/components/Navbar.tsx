@@ -90,8 +90,8 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden md:block">
-            <Link to="/register">
-              <AnimatedButton variant="primary">
+            <Link to="/register" className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+              <AnimatedButton variant="primary" size="lg" className="w-full text-base sm:text-lg px-6 py-2">
                 Register Now
               </AnimatedButton>
             </Link>
@@ -152,7 +152,7 @@ const Navbar: React.FC = () => {
             </a>
           ))}
           <Link to="/register" onClick={() => setMobileMenuOpen(false)}>
-            <AnimatedButton variant="primary" className="w-full justify-center">
+            <AnimatedButton variant="primary" size="lg" className="w-full justify-center text-base sm:text-lg px-6 py-2">
               Register Now
             </AnimatedButton>
           </Link>

@@ -44,10 +44,11 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
     outline: 'bg-transparent border-2 border-hackathon-pink text-hackathon-pink hover:bg-hackathon-pink/10',
   };
 
+  // Responsive size styles
   const sizeStyles = {
-    sm: 'text-sm px-4 py-1.5',
-    md: 'text-base px-6 py-2',
-    lg: 'text-lg px-8 py-3',
+    sm: 'text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-1.5',
+    md: 'text-sm sm:text-base px-4 sm:px-6 py-1.5 sm:py-2',
+    lg: 'text-base sm:text-lg px-6 sm:px-8 py-2 sm:py-3',
   };
 
   const generateConfetti = () => {
@@ -80,10 +81,10 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   };
 
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
       <button
         className={cn(
-          'relative rounded-full transition-all duration-200 font-medium',
+          'relative rounded-full transition-all duration-200 font-medium w-full',
           'overflow-hidden',
           variantStyles[variant],
           sizeStyles[size],

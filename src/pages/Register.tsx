@@ -290,19 +290,21 @@ const Register = () => {
                   <AnimatedButton
                     variant="outline"
                     onClick={handlePrevStep}
-                    className="px-6"
+                    size="lg"
+                    className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg text-base sm:text-lg px-6 py-2"
                   >
                     Back
                   </AnimatedButton>
                 ) : (
                   <div></div> 
                 )}
-                
+
                 <AnimatedButton
                   variant="primary"
                   onClick={handleNextStep}
                   withConfetti={formStep === 2}
-                  className="px-6 md:px-8"
+                  size="lg"
+                  className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg text-base sm:text-lg px-6 py-2"
                 >
                   {formStep < 2 ? 'Continue' : 'Register'}
                   {formStep < 2 && (
