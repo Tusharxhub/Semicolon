@@ -5,13 +5,18 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Timeline from '@/components/Timeline';
 import Tracks from '@/components/Tracks';
-import Judges from '@/components/Judges';
-import FAQ from '@/components/FAQ';
-import Team from '@/components/Team';
 import FloatingElements from '@/components/FloatingElements';
+import { Suspense, lazy, useState } from 'react';
+
+// Lazy load heavier below-the-fold sections
+const Judges = lazy(() => import('@/components/Judges'));
+const FAQ = lazy(() => import('@/components/FAQ'));
+const Team = lazy(() => import('@/components/Team'));
+const Sponsors = lazy(() => import('@/components/Sponsors'));
 import { toast } from '@/hooks/use-toast';
 
 const Index = () => {
+  const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
     // Show welcome toast
     toast({
@@ -49,7 +54,7 @@ const Index = () => {
       });
     };
 
-    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+  const observer = new IntersectionObserver(handleIntersection, observerOptions);
     
     const revealElements = document.querySelectorAll('.reveal-section');
     revealElements.forEach(element => {
@@ -62,6 +67,7 @@ const Index = () => {
         observer.unobserve(element);
       });
     };
+    setHydrated(true);
   }, []);
 
   return (
@@ -79,15 +85,20 @@ const Index = () => {
         <div className="reveal-section">
           <Tracks />
         </div>
-        <div className="reveal-section">
-          <Judges />
-        </div>
-        <div className="reveal-section">
-          <Team />
-        </div>
-        <div className="reveal-section">
-          <FAQ />
-        </div>
+        <Suspense fallback={<div className="text-center py-10 text-sm text-slate-400">Loading sections...</div>}>
+          <div className="reveal-section">
+            {hydrated && <Judges />}
+          </div>
+          <div className="reveal-section">
+            {hydrated && <Team />}
+          </div>
+          <div className="reveal-section">
+            {hydrated && <Sponsors />}
+          </div>
+          <div className="reveal-section">
+            {hydrated && <FAQ />}
+          </div>
+        </Suspense>
       </main>
       <footer className="bg-hackathon-blue text-white py-10 mt-16">
         <div className="container mx-auto px-4">

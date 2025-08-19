@@ -4,10 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SemiColon;</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preload" as="font" type="font/ttf" href="/reiswar/Reiswar.ttf" crossorigin>
+    <meta name="theme-color" content="#ffffff" />
+    <style>
+      /* Critical minimal fade-in to avoid layout shift */
+      body { opacity: 0; transition: opacity .3s ease; }
+      body.ready { opacity: 1; }
+      .prm * { animation: none !important; transition: none !important; }
+    </style>
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>window.requestAnimationFrame(()=>document.body.classList.add('ready'));</script>
   </body>
 </html>

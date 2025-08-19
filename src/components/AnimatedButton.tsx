@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
 interface AnimatedButtonProps {
@@ -11,7 +11,7 @@ interface AnimatedButtonProps {
   withConfetti?: boolean;
 }
 
-const AnimatedButton: React.FC<AnimatedButtonProps> = ({
+const AnimatedButton: React.FC<AnimatedButtonProps> = React.memo(({
   children,
   className,
   onClick,
@@ -51,45 +51,48 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
     lg: 'text-base sm:text-lg px-6 sm:px-8 py-2 sm:py-3',
   };
 
-  const generateConfetti = () => {
-    return Array.from({ length: 20 }).map((_, index) => {
+  const generateConfetti = useMemo(() => {
+    if (!withConfetti) return null;
+    const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return null;
+    return Array.from({ length: 14 }).map((_, index) => {
       const left = `${Math.random() * 100}%`;
-      const animationDuration = `${Math.random() * 3 + 2}s`;
-      const size = `${Math.random() * 10 + 5}px`;
+      const animationDuration = `${Math.random() * 2 + 1.5}s`;
+      const size = `${Math.random() * 8 + 4}px`;
       const color = [
         'bg-hackathon-pink', 
         'bg-hackathon-yellow', 
         'bg-hackathon-blue',
         'bg-hackathon-cyan'
       ][Math.floor(Math.random() * 4)];
-      
       return (
         <div
           key={index}
-          className={`absolute rounded-full ${color}`}
+          className={`absolute rounded-full ${color} will-change-transform will-change-opacity`}
           style={{
             left,
             top: '0',
             width: size,
             height: size,
             animation: `confetti ${animationDuration} ease-in-out forwards`,
-            animationDelay: `${Math.random() * 0.5}s`,
+            animationDelay: `${Math.random() * 0.4}s`,
           }}
         />
       );
     });
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showConfetti]);
 
   return (
-    <div className="relative inline-block w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+  <div className="relative inline-block w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg will-change-transform">
       <button
         className={cn(
-          'relative rounded-full transition-all duration-200 font-medium w-full',
+      'relative rounded-full transition-colors duration-200 font-medium w-full select-none',
           'overflow-hidden',
           variantStyles[variant],
           sizeStyles[size],
-          isPressed && 'transform scale-95',
-          isHovered && 'transform scale-105',
+      // scale only for capable devices (avoid layout shift)
+      !window.matchMedia?.('(prefers-reduced-motion: reduce)') && isPressed ? 'translate-y-px' : '',
           className
         )}
         onMouseEnter={() => setIsHovered(true)}
@@ -106,11 +109,9 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
           )} 
         />
       </button>
-      {showConfetti && <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {generateConfetti()}
-      </div>}
+    {showConfetti && generateConfetti && <div className="absolute inset-0 overflow-hidden pointer-events-none">{generateConfetti}</div>}
     </div>
   );
-};
+});
 
 export default AnimatedButton;

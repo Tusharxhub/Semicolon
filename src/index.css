@@ -115,6 +115,12 @@
     img, video, canvas, svg { max-width: 100%; height: auto; }
     iframe { max-width: 100%; }
 
+      /* Focus styles for accessibility (visible-focus) */
+      :focus-visible { outline: 2px solid #FF5B65; outline-offset: 2px; }
+
+      /* Larger tap targets */
+      button, a, [role="button"] { min-height: 44px; }
+
     /* Utility to contain long words / code */
     .break-words { overflow-wrap: anywhere; word-break: break-word; }
     .no-scroll-x { overflow-x: hidden !important; }
@@ -193,6 +199,12 @@
 
 .timeline-track::-webkit-scrollbar {
   display: none;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition: none !important; }
+  html { scroll-behavior: auto; }
 }
 
 
@@ -466,6 +478,10 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Performance: hint heavy animated elements */
+.will-change-transform { will-change: transform; }
+.will-change-opacity { will-change: opacity; }
 
 /* Create a staggered animation effect */
 .stagger-animate > * {
