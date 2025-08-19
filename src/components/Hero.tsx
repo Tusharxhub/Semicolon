@@ -63,7 +63,7 @@ const Hero = () => {
     SemiColon <span className="text-hackathon-black">;</span>
   </span>                <span className="block text-hackathon-pink wavy-underline">Hackathon</span>
               </h1>
-              <p className="text-slate-700 text-base md:text-lg lg:text-xl mt-4 leading-relaxed">
+              <p className="text-slate-300 text-base md:text-lg lg:text-xl mt-4 leading-relaxed">
                 Join us for an exciting 36-hour journey of innovation, creativity, and collaboration. Build something amazing with fellow developers!
               </p>
             </div>
