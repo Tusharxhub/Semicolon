@@ -105,7 +105,7 @@ const Index = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-lg md:text-xl font-bold mb-4">SemiColon</h3>
-              <p className="text-white/70 text-sm md:text-base leading-relaxed">A 36-hour hackathon experience designed to inspire innovation and collaboration.</p>
+              <p className="text-white/70 text-sm md:text-base leading-relaxed">A 24-hour hackathon experience designed to inspire innovation and collaboration.</p>
             </div>
             <div>
               <h3 className="text-lg font-bold mb-4">Quick Links</h3>
