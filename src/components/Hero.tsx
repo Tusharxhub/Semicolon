@@ -59,7 +59,7 @@ const Hero = () => {
                 </span>
               </div>
               <h1 className="text-3xl xs:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
-                <span className="text-amber-200">
+                <span className="text-amber-300">
                   SemiColon <span className="text-hackathon-black">;</span>
                 </span>
                 <span className="block text-hackathon-pink wavy-underline">Hackathon</span>
