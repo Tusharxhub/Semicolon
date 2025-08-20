@@ -107,9 +107,9 @@ const FAQ = () => {
           
           <div className="mt-8 text-center">
             <p className="text-slate-600 mb-3 text-xs md:text-sm">Still have questions?</p>
-            <button className="bg-hackathon-blue text-white px-4 md:px-5 py-2.5 rounded-full hover:bg-hackathon-pink transition-colors duration-300 transform hover:scale-105 hover:shadow-md text-xs md:text-sm">
+            {/* <button className="bg-hackathon-blue text-white px-4 md:px-5 py-2.5 rounded-full hover:bg-hackathon-pink transition-colors duration-300 transform hover:scale-105 hover:shadow-md text-xs md:text-sm">
               Contact Us
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

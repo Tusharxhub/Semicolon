@@ -12,10 +12,20 @@ const Hero = () => {
     seconds: 0
   });
 
-  // Set the target date to 30 days from now
+  // Countdown to fixed hackathon start: 6 September (auto-rolls to next year if passed)
   useEffect(() => {
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 30);
+    const getTargetDate = () => {
+      const now = new Date();
+      const year = now.getFullYear();
+      // Month is 0-indexed: 8 = September. Adjust time (UTC vs local) if needed.
+      const event = new Date(year, 8, 6, 0, 0, 0); // 6 Sep YYYY 00:00 local
+      if (event.getTime() <= now.getTime()) {
+        return new Date(year + 1, 8, 6, 0, 0, 0);
+      }
+      return event;
+    };
+
+    const targetDate = getTargetDate();
     
     const timer = setInterval(() => {
       const now = new Date();
@@ -23,7 +33,8 @@ const Hero = () => {
       
       if (difference <= 0) {
         clearInterval(timer);
-        return;
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return; // Event started
       }
       
       const days = Math.floor(difference / (1000 * 60 * 60 * 24));
