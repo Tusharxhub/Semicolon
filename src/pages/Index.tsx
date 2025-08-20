@@ -115,7 +115,7 @@ const Index = () => {
             </div>
             <div>
               <h3 className="text-lg font-bold mb-4">Contact</h3>
-              <p className="text-white/70 mb-2 text-sm md:text-base">Email: info@semicolon.dev</p>
+              <p className="text-white/70 mb-2 text-sm md:text-base">Email: auhackathon2025@gmail.com</p>
               <div className="flex space-x-4">
                 <a href="https://www.instagram.com/semicolon_2k25" className="text-white/70 hover:text-white transition-colors interactive-button">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
