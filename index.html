@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preload" as="font" type="font/ttf" href="/reiswar/Reiswar.ttf" crossorigin>
     <meta name="theme-color" content="#ffffff" />
+    <!-- Favicon / shortcut (prevents common 404 for /favicon.ico) -->
+    <link rel="icon" type="image/svg+xml" href="/placeholder.svg" />
+    <link rel="alternate icon" href="/placeholder.svg" />
     <style>
       /* Critical minimal fade-in to avoid layout shift */
       body { opacity: 0; transition: opacity .3s ease; }
@@ -20,5 +23,18 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>window.requestAnimationFrame(()=>document.body.classList.add('ready'));</script>
+    <!-- Lightweight resource error logger (dev aid) -->
+    <script>
+      (function(){
+        if(location.hostname==='localhost' || location.hostname==='127.0.0.1'){
+          window.addEventListener('error', function(e){
+            var t = e.target; // resource element
+            if(t && (t.src || t.href)) {
+              console.warn('[ResourceError]', t.tagName, t.src||t.href, e.message);
+            }
+          }, true);
+        }
+      })();
+    </script>
   </body>
 </html>

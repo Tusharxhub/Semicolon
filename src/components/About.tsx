@@ -228,32 +228,42 @@ const About: React.FC = () => {
     return () => cleanups.forEach(f => f());
   }, []);
 
-  const cards = [
+  const isMobile = typeof window !== 'undefined' && window.matchMedia('(pointer:coarse)').matches;
+
+  const cards = React.useMemo(() => [
     {
       title: "Innovation",
       description: "Power-up ideas that feel like grabbing a Super Mushroom and leveling up instantly.",
       icon: "🍄",
-      color: "linear-gradient(135deg,#ff2a2a 0%,#b30000 100%), repeating-linear-gradient(45deg,rgba(255,255,255,0.18)0 6px,rgba(0,0,0,0)6px 12px)"
+      color: isMobile
+        ? "linear-gradient(135deg,#ff2a2a,#b30000)"
+        : "linear-gradient(135deg,#ff2a2a 0%,#b30000 100%), repeating-linear-gradient(45deg,rgba(255,255,255,0.18)0 6px,rgba(0,0,0,0)6px 12px)"
     },
     {
       title: "Collaboration",
       description: "Break brick walls together—pair up, share 1‑UPs, and clear tough stages as a squad.",
       icon: "🧱",
-      color: "repeating-linear-gradient(0deg,#8b4513 0 14px,#6a3210 14px 28px), repeating-linear-gradient(90deg,#9c5120 0 14px,#6a3210 14px 28px)"
+      color: isMobile
+        ? "linear-gradient(135deg,#9c5120,#6a3210)"
+        : "repeating-linear-gradient(0deg,#8b4513 0 14px,#6a3210 14px 28px), repeating-linear-gradient(90deg,#9c5120 0 14px,#6a3210 14px 28px)"
     },
     {
       title: "Learning",
       description: "Collect stars of knowledge—each mechanic mastered is a new world unlocked.",
       icon: "⭐",
-      color: "radial-gradient(circle at 30% 30%,#ffe87a 0%,#ffc400 60%,#c79200 100%), repeating-linear-gradient(45deg,rgba(255,255,255,0.4)0 4px,rgba(255,255,255,0)4px 8px)"
+      color: isMobile
+        ? "radial-gradient(circle at 30% 30%,#ffe87a,#ffc400)"
+        : "radial-gradient(circle at 30% 30%,#ffe87a 0%,#ffc400 60%,#c79200 100%), repeating-linear-gradient(45deg,rgba(255,255,255,0.4)0 4px,rgba(255,255,255,0)4px 8px)"
     },
     {
       title: "Networking",
       description: "Dive down warp pipes into new realms—meet mentors, sponsors, and future co‑founders.",
       icon: "🛠️",
-      color: "linear-gradient(180deg,#0c8f35 0%,#087128 40%,#044d18 100%), repeating-linear-gradient(90deg,rgba(255,255,255,0.15)0 6px,rgba(0,0,0,0)6px 12px)"
+      color: isMobile
+        ? "linear-gradient(180deg,#0c8f35,#044d18)"
+        : "linear-gradient(180deg,#0c8f35 0%,#087128 40%,#044d18 100%), repeating-linear-gradient(90deg,rgba(255,255,255,0.15)0 6px,rgba(0,0,0,0)6px 12px)"
     }
-  ];
+  ], [isMobile]);
 
   return (
   <section id="about" className="py-16 md:py-20 relative overflow-hidden bg-white">
