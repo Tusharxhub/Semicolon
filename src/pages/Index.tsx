@@ -59,23 +59,23 @@ const Index = () => {
       <Navbar />
   <main className="overflow-x-hidden">
         <Hero />
-        <div className="reveal-section">
+        <div className="reveal-section cv-auto">
           <About />
         </div>
-        <div className="reveal-section">
+        <div className="reveal-section cv-auto">
           <Timeline />
         </div>
-        <div className="reveal-section">
+        <div className="reveal-section cv-auto">
           <Tracks />
         </div>
         <Suspense fallback={<div className="text-center py-10 text-sm text-slate-400">Loading sections...</div>}>
-          <div className="reveal-section">
+          <div className="reveal-section cv-auto">
             <Judges />
           </div>
-          <div className="reveal-section">
+          <div className="reveal-section cv-auto">
             <Team />
           </div>
-          <div className="reveal-section">
+          <div className="reveal-section cv-auto">
             <FAQ />
           </div>
         </Suspense>

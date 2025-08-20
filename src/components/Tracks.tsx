@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
 interface Track {
@@ -13,7 +13,7 @@ interface Track {
 const Tracks: React.FC = () => {
   const [expandedTrack, setExpandedTrack] = useState<number | null>(null);
   
-  const tracks: Track[] = [
+  const tracks: Track[] = useMemo(() => ([
     {
       title: "Software",
       description: "Build innovative software solutions, apps, or platforms. Tackle challenges in web, mobile, cloud, or any area of software engineering.",
@@ -28,7 +28,7 @@ const Tracks: React.FC = () => {
       color: "bg-hackathon-pink",
       prizes: ["Cash Prizes", "Hardware Kits", "Industry Networking"]
     }
-  ];
+  ]), []);
 
   const handleTrackClick = (index: number) => {
     setExpandedTrack(expandedTrack === index ? null : index);

@@ -11,6 +11,9 @@
     <!-- Favicon / shortcut (prevents common 404 for /favicon.ico) -->
     <link rel="icon" type="image/svg+xml" href="/placeholder.svg" />
     <link rel="alternate icon" href="/placeholder.svg" />
+  <!-- Google Font stylesheet (moved from CSS @import for faster parallel loading) -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" as="style" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
     <style>
       /* Critical minimal fade-in to avoid layout shift */
       body { opacity: 0; transition: opacity .3s ease; }

@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -17,13 +17,22 @@ const Timeline: React.FC = () => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [scrollMax, setScrollMax] = useState(0);
 
-  const handleScroll = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setScrollLeft(scrollLeft);
-      setScrollMax(scrollWidth - clientWidth);
-    }
-  };
+  // rAF throttled scroll handler
+  const handleScroll = (() => {
+    let ticking = false;
+    return () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const el = scrollContainerRef.current;
+        if (!el) return;
+        const { scrollLeft, scrollWidth, clientWidth } = el;
+        setScrollLeft(scrollLeft);
+        setScrollMax(scrollWidth - clientWidth);
+      });
+    };
+  })();
 
   // Initialize scroll state on mount and window resize
   useEffect(() => {
@@ -41,7 +50,7 @@ const Timeline: React.FC = () => {
     }
   };
 
-  const events: TimelineEvent[] = [
+  const events: TimelineEvent[] = useMemo(() => ([
     {
       time: "9:00 AM",
       title: "Registration & Check-in",
@@ -105,7 +114,7 @@ const Timeline: React.FC = () => {
       day: 2,
       color: "bg-hackathon-cyan"
     }
-  ];
+  ]), []);
 
   return (
   <section id="timeline" className="py-16 md:py-20 bg-hackathon-lightblue/30">

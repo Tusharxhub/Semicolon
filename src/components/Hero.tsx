@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, lazy } from 'react';
+import React, { useEffect, useState, Suspense, lazy, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 // Lazy load heavy Lottie dependency
@@ -49,13 +49,36 @@ const Hero = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Lottie animation options
+  // Lottie animation options (autoplay disabled; we'll manually control for visibility & reduced motion)
+  const prefersReduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   const defaultOptions = {
     loop: true,
-    autoplay: !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches,
+    autoplay: false,
     animationData: astronautAnimation,
     rendererSettings: { preserveAspectRatio: 'xMidYMid slice' }
   } as const;
+
+  const lottieRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  // Control Lottie play/pause based on viewport visibility
+  useEffect(() => {
+    if (prefersReduce) return; // don't play animation if reduced motion
+    if (!('IntersectionObserver' in window)) return; // safety
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          lottieRef.current?.anim?.play?.();
+        } else {
+          lottieRef.current?.anim?.pause?.();
+        }
+      }
+    }, { threshold: 0.2 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [prefersReduce]);
 
   return (
     <section className="relative min-h-screen pt-24 sm:pt-28 overflow-hidden mesh-gradient flex items-center">
@@ -122,16 +145,17 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="relative h-[260px] xs:h-[300px] md:h-[480px] lg:h-[520px] w-full order-1 lg:order-2">
+          <div ref={containerRef} className="relative h-[260px] xs:h-[300px] md:h-[480px] lg:h-[520px] w-full order-1 lg:order-2 will-change-transform">
             {/* Lottie Animation replacing the SVG */}
               <LottieWrapper className="absolute inset-0 flex items-center justify-center">
                 <Suspense fallback={<div className="text-xs text-slate-400 animate-pulse">Loading animation...</div>}>
                   <Lottie 
+                    ref={lottieRef as any}
                     options={defaultOptions}
                     height="100%"
                     width="100%"
                     isStopped={false}
-                    isPaused={false}
+                    isPaused={prefersReduce}
                   />
                 </Suspense>
               
@@ -143,17 +167,24 @@ const Hero = () => {
             <div className="absolute top-1/4 right-1/4 w-16 h-16 bg-hackathon-cyan rounded-full opacity-50 animate-bounce-gentle"></div>
             
             {/* Stars */}
-            {Array.from({ length: 14 }).map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-white rounded-full animate-pulse-glow"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 2}s`,
-                }}
-              ></div>
-            ))}
+            {/* Stable deterministic stars to avoid layout thrash & hydration mismatch */}
+            {React.useMemo(() => {
+              const seed = 7;
+              const stars = Array.from({ length: 14 }).map((_, i) => {
+                // simple LCG for repeatable pseudo-random
+                let x = (seed + i * 9301 + 49297) % 233280;
+                const rand = () => { x = (x * 9301 + 49297) % 233280; return x / 233280; };
+                return {
+                  id: i,
+                  top: (rand() * 100).toFixed(2) + '%',
+                  left: (rand() * 100).toFixed(2) + '%',
+                  delay: (rand() * 2).toFixed(2) + 's'
+                };
+              });
+              return stars.map(s => (
+                <div key={s.id} className="absolute w-1 h-1 bg-white rounded-full animate-pulse-glow" style={{ top: s.top, left: s.left, animationDelay: s.delay }} />
+              ));
+            }, [])}
           </div>
         </div>
         

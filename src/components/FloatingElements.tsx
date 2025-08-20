@@ -25,7 +25,7 @@ const FloatingElements: React.FC<FloatingElementsProps> = ({ className }) => {
   }
   const { shapes, stars } = ref.current!;
   return (
-    <div className={cn('fixed inset-0 pointer-events-none z-0 overflow-hidden', className)} aria-hidden='true'>
+  <div className={cn('fixed inset-0 pointer-events-none z-0 overflow-hidden decorative-heavy', className)} aria-hidden='true'>
       {shapes.map((shape, i) => (
         <div key={i} className={cn(
           shape.color, shape.size,
