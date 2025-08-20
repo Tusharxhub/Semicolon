@@ -16,54 +16,30 @@ import { toast } from '@/hooks/use-toast';
 
 const Index = () => {
   useEffect(() => {
-    // Show welcome toast
-    toast({
-      title: "Welcome to SemiColon!",
-      description: "Scroll down to explore our hackathon experience",
-      variant: "default",
-    });
+    // Toast after first paint (defer to idle for faster FMP)
+    const id = requestIdleCallback?.(() => toast({
+      title: 'Welcome to SemiColon!',
+      description: 'Scroll down to explore our hackathon experience'
+    })) || setTimeout(() => toast({ title: 'Welcome to SemiColon!', description: 'Scroll down to explore our hackathon experience' }), 350);
 
-    // Add hover interactions for better interactivity
-    const interactiveElements = document.querySelectorAll('.interactive-button');
-    interactiveElements.forEach(element => {
-      element.addEventListener('mouseenter', () => {
-        element.classList.add('hover:scale-105', 'transition-transform');
-      });
-      
-      element.addEventListener('mouseleave', () => {
-        element.classList.remove('hover:scale-105');
-      });
-    });
-
-    // Add fade-in animations on scroll with IntersectionObserver
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in');
-          entry.target.classList.remove('opacity-0');
-          observer.unobserve(entry.target);
+    // IntersectionObserver for reveal animations (lighter config)
+    const observer = new IntersectionObserver((entries, obs) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add('animate-fade-in');
+          e.target.classList.remove('opacity-0');
+          obs.unobserve(e.target);
         }
-      });
-    };
+      }
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
 
-  const observer = new IntersectionObserver(handleIntersection, observerOptions);
-    
     const revealElements = document.querySelectorAll('.reveal-section');
-    revealElements.forEach(element => {
-      element.classList.add('opacity-0');
-      observer.observe(element);
-    });
-    
+    revealElements.forEach(el => { el.classList.add('opacity-0'); observer.observe(el); });
+
     return () => {
-      revealElements.forEach(element => {
-        observer.unobserve(element);
-      });
+      (cancelIdleCallback as any)?.(id);
+      revealElements.forEach(el => observer.unobserve(el));
+      observer.disconnect();
     };
   }, []);
 

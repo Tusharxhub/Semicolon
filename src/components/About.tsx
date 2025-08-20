@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const About: React.FC = () => {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
-  
-  // Ultra dynamic "crazy" hover / motion + particle burst (optimized for smoother 60fps)
-  if (typeof document !== 'undefined' && !document.getElementById('crazy-card-styles')) {
+  // Inject advanced hover styles once (client-side only)
+  useEffect(() => {
+    if (document.getElementById('crazy-card-styles')) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const style = document.createElement('style');
     style.id = 'crazy-card-styles';
     style.innerHTML = `
@@ -13,7 +13,7 @@ const About: React.FC = () => {
         position: relative;
         overflow: hidden;
         transform: perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0);
-        transition: transform .25s cubic-bezier(.22,.61,.36,1), box-shadow .45s;
+        transition: ${reduceMotion ? 'none' : 'transform .25s cubic-bezier(.22,.61,.36,1), box-shadow .45s'};
         will-change: transform;
         --glow: 0 0 0 rgba(255,255,255,0);
         backface-visibility:hidden;
@@ -135,11 +135,12 @@ const About: React.FC = () => {
       }
     `;
     document.head.appendChild(style);
-  }
+  }, []);
 
   // Optimized JS driven interactive tilt + particles (rAF throttled for 60fps)
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof document === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; // skip heavy motion
     const els = Array.from(document.querySelectorAll('#about .grid > div')) as HTMLElement[];
     const cleanups: (() => void)[] = [];
 
@@ -270,7 +271,7 @@ const About: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 mb-12 md:mb-16">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 mb-12 md:mb-16 will-change-transform">
           {cards.map((card, index) => (
             <StyledCard key={index} color={card.color}>
               <div className="content-box">

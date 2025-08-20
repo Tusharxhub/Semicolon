@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Lottie from 'react-lottie';
-import astronautAnimation from './Ania.json'; // Import the Lottie animation file
+// Lazy load heavy Lottie dependency
+const Lottie = lazy(() => import('react-lottie'));
+import astronautAnimation from './Ania.json';
 
 const Hero = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -51,12 +52,10 @@ const Hero = () => {
   // Lottie animation options
   const defaultOptions = {
     loop: true,
-    autoplay: true,
+    autoplay: !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches,
     animationData: astronautAnimation,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
-  };
+    rendererSettings: { preserveAspectRatio: 'xMidYMid slice' }
+  } as const;
 
   return (
     <section className="relative min-h-screen pt-24 sm:pt-28 overflow-hidden mesh-gradient flex items-center">
@@ -125,14 +124,16 @@ const Hero = () => {
           
           <div className="relative h-[260px] xs:h-[300px] md:h-[480px] lg:h-[520px] w-full order-1 lg:order-2">
             {/* Lottie Animation replacing the SVG */}
-            <LottieWrapper className="absolute inset-0 flex items-center justify-center">
-              <Lottie 
-                options={defaultOptions}
-                height="100%"
-                width="100%"
-                isStopped={false}
-                isPaused={false}
-              />
+              <LottieWrapper className="absolute inset-0 flex items-center justify-center">
+                <Suspense fallback={<div className="text-xs text-slate-400 animate-pulse">Loading animation...</div>}>
+                  <Lottie 
+                    options={defaultOptions}
+                    height="100%"
+                    width="100%"
+                    isStopped={false}
+                    isPaused={false}
+                  />
+                </Suspense>
               
               {/* Add a glowing effect behind the animation */}
               <div className="absolute top-1/4 right-1/4 w-20 h-20 bg-hackathon-yellow rounded-full opacity-30 animate-pulse-glow"></div>
@@ -142,7 +143,7 @@ const Hero = () => {
             <div className="absolute top-1/4 right-1/4 w-16 h-16 bg-hackathon-cyan rounded-full opacity-50 animate-bounce-gentle"></div>
             
             {/* Stars */}
-            {Array.from({ length: 20 }).map((_, i) => (
+            {Array.from({ length: 14 }).map((_, i) => (
               <div
                 key={i}
                 className="absolute w-1 h-1 bg-white rounded-full animate-pulse-glow"
