@@ -6,17 +6,15 @@ import About from '@/components/About';
 import Timeline from '@/components/Timeline';
 import Tracks from '@/components/Tracks';
 import FloatingElements from '@/components/FloatingElements';
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy } from 'react';
 
 // Lazy load heavier below-the-fold sections
 const Judges = lazy(() => import('@/components/Judges'));
 const FAQ = lazy(() => import('@/components/FAQ'));
 const Team = lazy(() => import('@/components/Team'));
-const Sponsors = lazy(() => import('@/components/Sponsors'));
 import { toast } from '@/hooks/use-toast';
 
 const Index = () => {
-  const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
     // Show welcome toast
     toast({
@@ -67,7 +65,6 @@ const Index = () => {
         observer.unobserve(element);
       });
     };
-    setHydrated(true);
   }, []);
 
   return (
@@ -87,16 +84,13 @@ const Index = () => {
         </div>
         <Suspense fallback={<div className="text-center py-10 text-sm text-slate-400">Loading sections...</div>}>
           <div className="reveal-section">
-            {hydrated && <Judges />}
+            <Judges />
           </div>
           <div className="reveal-section">
-            {hydrated && <Team />}
+            <Team />
           </div>
           <div className="reveal-section">
-            {hydrated && <Sponsors />}
-          </div>
-          <div className="reveal-section">
-            {hydrated && <FAQ />}
+            <FAQ />
           </div>
         </Suspense>
       </main>
@@ -123,9 +117,9 @@ const Index = () => {
               <h3 className="text-lg font-bold mb-4">Contact</h3>
               <p className="text-white/70 mb-2 text-sm md:text-base">Email: info@semicolon.dev</p>
               <div className="flex space-x-4">
-                <a href="#" className="text-white/70 hover:text-white transition-colors interactive-button">
+                <a href="https://www.instagram.com/semicolon_2k25" className="text-white/70 hover:text-white transition-colors interactive-button">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
+                    <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7ZM17.5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
                   </svg>
                 </a>
                 <a href="#" className="text-white/70 hover:text-white transition-colors interactive-button">
