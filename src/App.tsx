@@ -48,6 +48,30 @@ const App = () => {
     return () => media.removeEventListener('change', apply);
   }, []);
 
+  // Idle prefetch for secondary routes (improves subsequent navigation speed)
+  useEffect(() => {
+    const idle = (cb: () => void) => (window.requestIdleCallback ? (window as any).requestIdleCallback(cb, { timeout: 2500 }) : setTimeout(cb, 400));
+    const id = idle(() => {
+      // Fire & forget route code preloads
+      import('./pages/Register');
+      import('./pages/LearnMore');
+      import('./pages/NotFound');
+    });
+    return () => (window.cancelIdleCallback ? (window as any).cancelIdleCallback(id) : clearTimeout(id));
+  }, []);
+
+  // Prewarm below‑the‑fold heavy homepage sections once index route mounts (executed here so it runs for initial landing path '/')
+  useEffect(() => {
+    if (location.pathname === '/') {
+      const t = setTimeout(() => {
+        import('@/components/Judges');
+        import('@/components/Team');
+        import('@/components/FAQ');
+      }, 1200); // small delay to avoid competing with initial render
+      return () => clearTimeout(t);
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>

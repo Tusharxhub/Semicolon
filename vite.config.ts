@@ -7,6 +7,21 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('scheduler')) return 'react';
+            if (id.includes('@radix-ui')) return 'radix';
+            if (id.includes('styled-components')) return 'styled';
+            if (id.includes('@tanstack/react-query')) return 'react-query';
+            if (id.includes('react-router')) return 'router';
+          }
+        }
+      }
+    }
+  },
   plugins: [
     react(),
     mode === 'development' &&
