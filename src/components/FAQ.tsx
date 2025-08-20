@@ -47,11 +47,11 @@ const FAQ = () => {
     },
     {
       question: "How do teams work?",
-      answer: "Teams consist of 2-4 members. You can form your own team before the event or join a team during our team formation session. We'll help everyone find the right team!"
+      answer: "Teams consist of 6 members. You can form your own team before the event or join a team during our team formation session. We'll help everyone find the right team!"
     },
     {
       question: "What should I bring?",
-      answer: "Bring your laptop, chargers, any devices you'll need for development, and your enthusiasm! We'll provide food, drinks, and a workspace with internet access."
+      answer: "Bring your laptop, chargers, any devices you'll need for development, and your enthusiasm! We'll provide drinks and a workspace with internet access."
     },
     {
       question: "Will there be prizes?",
@@ -63,7 +63,7 @@ const FAQ = () => {
     },
     {
       question: "Will food be provided?",
-      answer: "Yes! We'll provide meals, snacks, and beverages throughout the 36-hour event to keep you energized and focused."
+      answer: "No, we are not providing food. Please plan to bring your own meals, snacks, and drinks (keep them tidy and low-odor)."
     }
   ];
 
