@@ -35,7 +35,7 @@ const FAQ = () => {
   const faqItems = [
     {
       question: "What is SemiColon Hackathon?",
-      answer: "SemiColon is a 36-hour hackathon where participants collaborate to build innovative projects. It's an opportunity to learn, create, network, and have fun with fellow tech enthusiasts."
+      answer: "SemiColon is a 24-hour hackathon where participants collaborate to build innovative projects. It's an opportunity to learn, create, network, and have fun with fellow tech enthusiasts."
     },
     {
       question: "Who can participate?",
@@ -68,9 +68,9 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" ref={faqRef} className="py-16 md:py-20 bg-gradient-to-b from-white to-hackathon-lightblue/30">
+  <section id="faq" ref={faqRef} className="py-12 md:py-16 bg-gradient-to-b from-white to-hackathon-lightblue/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10 md:mb-12 transform transition-all duration-700 hover:scale-105">
+  <div className="text-center mb-8 md:mb-10 transform transition-all duration-700 hover:scale-105">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-hackathon-blue leading-tight relative inline-block">
             Frequently Asked <span className="text-hackathon-pink">Questions</span>
             <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-hackathon-blue via-hackathon-pink to-hackathon-yellow transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
@@ -81,23 +81,23 @@ const FAQ = () => {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-3 md:space-y-4">
+        <div className="max-w-2xl md:max-w-3xl mx-auto">
+          <Accordion type="single" collapsible className="space-y-2.5 md:space-y-3.5">
             {faqItems.map((item, index) => (
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
                 className={cn(
-                  "faq-item border border-hackathon-lightblue/50 rounded-xl overflow-hidden",
-                  "bg-white shadow-sm hover:shadow-md transition-all duration-500 opacity-0 translate-y-10 focus-within:ring-2 focus-within:ring-hackathon-pink/40",
+                  "faq-item border border-hackathon-lightblue/50 rounded-lg overflow-hidden",
+                  "bg-white shadow-sm hover:shadow-md transition-all duration-500 opacity-0 translate-y-10 focus-within:ring-2 focus-within:ring-hackathon-pink/40 text-sm md:text-base",
                   "hover:border-hackathon-pink/50"
                 )}
               >
-                <AccordionTrigger className="px-4 md:px-6 py-3 md:py-4 text-left font-medium text-hackathon-blue hover:text-hackathon-pink transition-colors duration-300">
+                <AccordionTrigger className="px-4 md:px-5 py-2.5 md:py-3 text-left font-medium text-hackathon-blue hover:text-hackathon-pink transition-colors duration-300 text-base md:text-lg leading-snug">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent className="px-4 md:px-6 pb-4 text-slate-600 text-sm md:text-base animate-slide-down">
-                  <div className="transform transition-all duration-500 hover:translate-x-1 md:hover:translate-x-2 leading-relaxed">
+                <AccordionContent className="px-4 md:px-5 pb-3 text-slate-600 text-[13px] md:text-sm animate-slide-down">
+                  <div className="transform transition-all duration-500 hover:translate-x-1 md:hover:translate-x-1.5 leading-relaxed">
                     {item.answer}
                   </div>
                 </AccordionContent>
@@ -105,9 +105,9 @@ const FAQ = () => {
             ))}
           </Accordion>
           
-          <div className="mt-10 text-center">
-            <p className="text-slate-600 mb-4 text-sm md:text-base">Still have questions?</p>
-            <button className="bg-hackathon-blue text-white px-5 md:px-6 py-3 rounded-full hover:bg-hackathon-pink transition-colors duration-300 transform hover:scale-105 hover:shadow-lg text-sm md:text-base">
+          <div className="mt-8 text-center">
+            <p className="text-slate-600 mb-3 text-xs md:text-sm">Still have questions?</p>
+            <button className="bg-hackathon-blue text-white px-4 md:px-5 py-2.5 rounded-full hover:bg-hackathon-pink transition-colors duration-300 transform hover:scale-105 hover:shadow-md text-xs md:text-sm">
               Contact Us
             </button>
           </div>

@@ -65,7 +65,7 @@ const Hero = () => {
                 <span className="block text-hackathon-pink wavy-underline">Hackathon</span>
               </h1>
               <p className="text-slate-300 text-base md:text-lg lg:text-xl mt-4 leading-relaxed">
-                Join us for an exciting 36-hour journey of innovation, creativity, and collaboration. Build something amazing with fellow developers!
+                Join us for an exciting 24-hour journey of innovation, creativity, and collaboration. Build something amazing with fellow developers!
               </p>
             </div>
             
