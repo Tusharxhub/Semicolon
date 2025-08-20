@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 const Index = lazy(() => import(/* webpackPrefetch: true */ './pages/Index'));
 const Register = lazy(() => import('./pages/Register'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const LearnMore = lazy(() => import('./pages/LearnMore'));
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/learn" element={<LearnMore />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -91,9 +91,9 @@ const Hero = () => {
               </Link>
               <div className="sm:flex-1">
                 <RotatedButtonWrapper>
-                  <button className="button">
+                  <Link to="/learn" className="button">
                     <span>Learn More</span>
-                  </button>
+                  </Link>
                 </RotatedButtonWrapper>
               </div>
             </div>
